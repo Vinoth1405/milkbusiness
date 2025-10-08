@@ -5,70 +5,174 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SMC — Sai Milk Centre</title>
   <style>
-    :root{
-      --green:#2f8f4a;
-      --accent:#ffd700;
-      --muted:#6b6b6b;
-      --bg:#fffdf8;
-      --card:#ffffff;
+    :root {
+      --green: #2f8f4a;
+      --accent: #ffd700;
+      --muted: #6b6b6b;
+      --bg: #fffdf8;
+      --card: #ffffff;
       --shadow: 0 6px 20px rgba(47,143,74,0.12);
       --radius: 14px;
       font-family: Inter, system-ui, 'Poppins', Arial, sans-serif;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:#222;line-height:1.45}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: #222; line-height: 1.45; }
 
-    .nav{position:fixed;top:0;left:0;right:0;background:transparent;padding:18px 26px;display:flex;justify-content:space-between;align-items:center;gap:12px;z-index:60;transition:all .3s ease}
-    .nav .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--green),#56b36a);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:var(--shadow)}
-    .navlinks{display:flex;gap:14px;align-items:center}
-    .navlinks a{color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px;font-weight:600;background:transparent;transition:.3s}
-    .navlinks a:hover{background:rgba(255,255,255,0.15)}
-    .nav.scrolled{backdrop-filter:blur(6px);background:rgba(47,143,74,0.95);padding:10px 22px}
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: transparent;
+      padding: 18px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      z-index: 60;
+      transition: all .3s ease;
+    }
+    .nav .brand { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 56px; height: 56px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--green), #56b36a);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+    .navlinks { display: flex; gap: 14px; align-items: center; }
+    .navlinks a {
+      color: #fff; text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      background: transparent;
+      transition: .3s;
+    }
+    .navlinks a:hover { background: rgba(255,255,255,0.15); }
+    .nav.scrolled {
+      backdrop-filter: blur(6px);
+      background: rgba(47,143,74,0.95);
+      padding: 10px 22px;
+    }
 
-    .hero{min-height:68vh;padding:110px 20px 60px;display:grid;place-items:center;background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.2)),url('https://images.unsplash.com/photo-1558876790-4c0b290f0dce?auto=format&fit=crop&w=1500&q=80') center/cover;color:#fff;text-align:left}
-    .hero-inner{max-width:1200px;width:100%;display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center}
-    .hero h1{font-size:44px;margin:0 0 12px;letter-spacing:1px}
-    .tag{display:inline-block;background:rgba(255,255,255,0.85);color:#222;padding:8px 12px;border-radius:999px;font-weight:700}
-    .hero p{color:#f6f6f6;margin:8px 0 18px}
-    .cta{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;cursor:pointer;border:none;transition:.3s}
-    .btn-primary{background:var(--accent);color:#111}
-    .btn-outline{background:transparent;border:2px solid rgba(255,255,255,0.4);color:#fff}
-    .btn:hover{transform:translateY(-2px)}
+    /* Hero Section with background image */
+    .hero {
+      height: 100vh;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.3)),
+      url('images/cows.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+      color: #fff;
+      text-align: center;
+      padding: 0 20px;
+    }
 
-    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:18px 0}
-    .feature{background:rgba(255,255,255,0.9);color:#111;border-radius:16px;padding:14px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;font-weight:600;transition:.3s}
-    .feature:hover{background:#fff;transform:translateY(-4px);box-shadow:0 12px 30px rgba(47,143,74,0.15)}
+    .hero-inner { max-width: 1000px; margin: 0 auto; }
+    .hero h1 { font-size: 44px; margin: 0 0 12px; letter-spacing: 1px; }
+    .tag { display: inline-block; background: rgba(255,255,255,0.85); color: #222; padding: 8px 12px; border-radius: 999px; font-weight: 700; }
+    .hero p { color: #f6f6f6; margin: 8px 0 18px; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: .3s;
+    }
+    .btn-primary { background: var(--accent); color: #111; }
+    .btn-outline { background: transparent; border: 2px solid rgba(255,255,255,0.4); color: #fff; }
+    .btn:hover { transform: translateY(-2px); }
 
-    /* Remove hero card */
-    .hero-inner > .card{display:none}
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .feature {
+      background: rgba(255,255,255,0.9);
+      color: #111;
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      transition: .3s;
+    }
+    .feature:hover {
+      background: #fff;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(47,143,74,0.15);
+    }
 
-    .container{max-width:1100px;margin:28px auto;padding:28px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-    .product{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);transition:.3s}
-    .product:hover{transform:translateY(-6px);box-shadow:0 12px 24px rgba(47,143,74,0.15)}
-    .price{font-weight:800;color:var(--green)}
+    .container { max-width: 1100px; margin: 28px auto; padding: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 20px; }
+    .product {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: .3s;
+    }
+    .product:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(47,143,74,0.15); }
+    .price { font-weight: 800; color: var(--green); }
 
-    .contact{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
-    .whatsapp-fab{position:fixed;right:18px;bottom:18px;background:linear-gradient(180deg,var(--green),#56b36a);color:#fff;padding:14px 16px;border-radius:14px;box-shadow:0 12px 30px rgba(47,143,74,0.18);display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800}
-    .top{position:fixed;right:18px;bottom:88px;background:#111;color:#fff;padding:12px;border-radius:999px;display:none;align-items:center;justify-content:center;z-index:70}
+    .contact { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .whatsapp-fab {
+      position: fixed;
+      right: 18px; bottom: 18px;
+      background: linear-gradient(180deg,var(--green),#56b36a);
+      color: #fff;
+      padding: 14px 16px;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(47,143,74,0.18);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .top {
+      position: fixed;
+      right: 18px; bottom: 88px;
+      background: #111; color: #fff;
+      padding: 12px;
+      border-radius: 999px;
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 70;
+    }
 
-    footer{background:#f3f7f3;padding:28px 18px;margin-top:40px;border-top:1px solid rgba(0,0,0,0.04)}
-    .muted{color:var(--muted)}
+    footer {
+      background: #f3f7f3;
+      padding: 28px 18px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(0,0,0,0.04);
+    }
+    .muted { color: var(--muted); }
 
-    /* Mobile Fixes */
     @media(max-width:768px){
-      .hero-inner{display:block;text-align:center}
-      .hero h1{font-size:28px}
-      .tag{font-size:14px;padding:6px 10px}
-      .cta{flex-direction:column;gap:8px}
-      .grid{grid-template-columns:1fr}
-      .contact{flex-direction:column;gap:16px;text-align:center}
-      .navlinks{flex-direction:column;background:rgba(0,0,0,0.3);position:absolute;top:70px;right:10px;padding:10px;border-radius:12px;display:none}
-      .navlinks.show{display:flex}
+      .hero {
+        background-attachment: scroll; /* better for mobile */
+        height: 100vh;
+      }
+      .hero h1 { font-size: 28px; }
+      .tag { font-size: 14px; padding: 6px 10px; }
+      .cta { flex-direction: column; gap: 8px; }
+      .grid { grid-template-columns: 1fr; }
+      .contact { flex-direction: column; gap: 16px; text-align: center; }
+      .navlinks { flex-direction: column; background: rgba(0,0,0,0.3); position: absolute; top: 70px; right: 10px; padding: 10px; border-radius: 12px; display: none; }
+      .navlinks.show { display: flex; }
     }
   </style>
 </head>
@@ -149,41 +253,41 @@
   </footer>
 
   <script>
-    const products=[
-      {title:'Fresh Cow Milk',desc:'Pure cow milk, chilled daily',price:'₹60 / L'},
-      {title:'Fresh Buffalo Milk',desc:'Rich buffalo milk',price:'₹70 / L'},
-      {title:'Curd',desc:'Freshly set curd',price:'₹60 / L'},
-      {title:'Ghee',desc:'A2 ghee',price:'₹1000 / kg'},
-      {title:'Paneer',desc:'Homemade paneer',price:'₹400 / kg'},
-      {title:'Country Eggs',desc:'Free-range eggs',price:'₹20 / egg'},
-      {title:'Chicken',desc:'Country chicken',price:'₹450 / kg'}
+    const products = [
+      { title: 'Fresh Cow Milk', desc: 'Pure cow milk, chilled daily', price: '₹60 / L' },
+      { title: 'Fresh Buffalo Milk', desc: 'Rich buffalo milk', price: '₹70 / L' },
+      { title: 'Curd', desc: 'Freshly set curd', price: '₹60 / L' },
+      { title: 'Ghee', desc: 'A2 ghee', price: '₹1000 / kg' },
+      { title: 'Paneer', desc: 'Homemade paneer', price: '₹400 / kg' },
+      { title: 'Country Eggs', desc: 'Free-range eggs', price: '₹20 / egg' },
+      { title: 'Chicken', desc: 'Country chicken', price: '₹450 / kg' }
     ];
 
-    const grid=document.getElementById('productGrid');
-    products.forEach(p=>{
-      const el=document.createElement('div');
-      el.className='product';
-      el.innerHTML=`<h3>${p.title}</h3><p class='muted'>${p.desc}</p><div class='price'>${p.price}</div><div style='margin-top:10px'><button class='btn btn-primary' onclick=order('${p.title}')>Order</button></div>`;
+    const grid = document.getElementById('productGrid');
+    products.forEach(p => {
+      const el = document.createElement('div');
+      el.className = 'product';
+      el.innerHTML = `<h3>${p.title}</h3><p class='muted'>${p.desc}</p><div class='price'>${p.price}</div><div style='margin-top:10px'><button class='btn btn-primary' onclick=order('${p.title}')>Order</button></div>`;
       grid.appendChild(el);
     });
 
-    function order(item){
-      const text=`Hi, I would like to order: ${item}. Please confirm.`;
-      window.open('https://wa.me/919677261700?text='+encodeURIComponent(text),'_blank');
+    function order(item) {
+      const text = `Hi, I would like to order: ${item}. Please confirm.`;
+      window.open('https://wa.me/919677261700?text=' + encodeURIComponent(text), '_blank');
     }
 
-    const nav=document.getElementById('nav');
-    const topBtn=document.getElementById('topBtn');
-    window.addEventListener('scroll',()=>{
-      if(window.scrollY>60){
+    const nav = document.getElementById('nav');
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
         nav.classList.add('scrolled');
-        topBtn.style.display='flex';
-      }else{
+        topBtn.style.display = 'flex';
+      } else {
         nav.classList.remove('scrolled');
-        topBtn.style.display='none';
+        topBtn.style.display = 'none';
       }
     });
-    topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   </script>
 </body>
 </html>
