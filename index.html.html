@@ -162,10 +162,7 @@
     .muted { color: var(--muted); }
 
     @media(max-width:768px){
-      .hero {
-        background-attachment: scroll; /* better for mobile */
-        height: 100vh;
-      }
+      .hero { background-attachment: scroll; height: 100vh; }
       .hero h1 { font-size: 28px; }
       .tag { font-size: 14px; padding: 6px 10px; }
       .cta { flex-direction: column; gap: 8px; }
@@ -267,12 +264,19 @@
     products.forEach(p => {
       const el = document.createElement('div');
       el.className = 'product';
-      el.innerHTML = `<h3>${p.title}</h3><p class='muted'>${p.desc}</p><div class='price'>${p.price}</div><div style='margin-top:10px'><button class='btn btn-primary' onclick=order('${p.title}')>Order</button></div>`;
+      el.innerHTML = `
+        <h3>${p.title}</h3>
+        <p class='muted'>${p.desc}</p>
+        <div class='price'>${p.price}</div>
+        <div style='margin-top:10px'>
+          <button class='btn btn-primary' onclick="order('${encodeURIComponent(p.title)}')">Order</button>
+        </div>
+      `;
       grid.appendChild(el);
     });
 
     function order(item) {
-      const text = `Hi, I would like to order: ${item}. Please confirm.`;
+      const text = `Hi, I would like to order: ${decodeURIComponent(item)}. Please confirm.`;
       window.open('https://wa.me/919677261700?text=' + encodeURIComponent(text), '_blank');
     }
 
